@@ -1,16 +1,32 @@
-libdate.so:date.o
-	g++ --shared -o libdate.so date.o
+SOURCE	= main.cpp
+BINARY	= main
+HEADER	= libdate
+LIB	= -L $(HEADER) -l date
+BIN	= /usr/bin
+CP	= cp
+CD	= cd
+RM	= rm
+SUOD	= sudo
 
-date.o:date.cpp date.h
-	g++ -c -fPIC date.cpp 
 
-install:libdate.so date.h 
-	sudo cp date.h /usr/include/
-	sudo cp libdate.so /usr/lib/
+$(BINARY): $(SOURCE) $(HEADER)/*
+	$(CD) $(HEADER) && $(MAKE)
+	$(CXX) -I $(HEADER)  $(SOURCE) -o $(BINARY) $(LIB)
 
-uninstall:/usr/lib/libdate.so /usr/include/date.h
-	sudo rm -rf /usr/include/date.h
-	sudo rm -rf /usr/lib/libdate.so
+
+all: clean $(BINARY)
+
 
 clean:
-	rm -rf libdate.so
+	$(RM) -rf $(BINARY)
+	$(CD) $(HEADER) && $(MAKE) clean
+
+
+install:
+	$(CD) $(HEADER) && $(MAKE) install
+	sudo $(CP) $(BINARY) $(BIN)
+
+
+uninstall:
+	sudo $(RM) -rf $(BIN)/$(BINARY)
+	$(CD) $(HEADER) && $(MAKE) uninstall
