@@ -1,7 +1,5 @@
 #ifndef DATE
 #define DATE
-#endif 
-
 
 class Date
 {
@@ -18,3 +16,5 @@ class Date
 		int get_year(void);
 
 };
+
+#endif 
