@@ -8,15 +8,19 @@ Date::Date()
 	this->month = 0;
 	this->year = 0;
 }
+
+
 void Date::set_day(int day)
 {
 	this->day = day;
 }
 
+
 void Date::set_month(int month)
 {
 	this->month = month;
 }
+
 
 void Date::set_year(int year)
 {
